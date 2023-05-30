@@ -8,7 +8,7 @@
     </div>
     <div class="container">
         <div class="panel">
-            <div class="panel-title">{{ pageName }}</div>
+            <div class="panel-title">{{ pageTitle }}</div>
             <component :is="page" @change-page="(name) => (pageName = name)" />
         </div>
         <div class="left-bottom-corner"></div>
@@ -21,6 +21,7 @@ import { computed, ref } from "vue";
 import Forget from "./components/Forget.vue";
 import Login from "./components/Login.vue";
 import Register from "./components/Register.vue";
+import { t } from "../locale"
 
 const pageName = ref<string>('Login')
 const page = computed(() => {
@@ -33,6 +34,9 @@ const page = computed(() => {
             return Register
     }
     return null
+})
+const pageTitle = computed(() => {
+    return t(`titles.${pageName.value.toLowerCase()}`)
 })
 
 </script>
@@ -48,10 +52,15 @@ const page = computed(() => {
     background-color: white;
     padding: 8vh 8vw;
     min-width: 500px;
+    max-width: 700px;
+    width: 40%;
+    min-height: 500px;
 }
 
 .panel {
-    width: 350px;
+    min-width: 390px;
+    max-width: 500px;
+    width: 50%;
 }
 
 .carousel {
@@ -107,5 +116,10 @@ const page = computed(() => {
 .footer {
     margin-top: 30px;
     display: flex;
+    justify-content: center;
+}
+
+.footer>button {
+    width: 95%;
 }
 </style>

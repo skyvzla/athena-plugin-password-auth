@@ -41,15 +41,7 @@ async function showPage() {
     Page.open()
 }
 
+alt.on(PasswordAuthEvents.client.closePage, () => {
+    Page.close(true)
+})
 alt.onServer(PasswordAuthEvents.client.showPage, showPage)
-alt.onServer(PasswordAuthEvents.client.login, (state: boolean, error: string) => {
-    if (state) {
-        Page.close(true)
-    } else {
-        AthenaClient.webview.emit(PasswordAuthEvents.webview.login, error)
-    }
-})
-
-alt.onServer(PasswordAuthEvents.client.register, (state: boolean, error: string) => {
-    AthenaClient.webview.emit(PasswordAuthEvents.webview.register, state, error)
-})

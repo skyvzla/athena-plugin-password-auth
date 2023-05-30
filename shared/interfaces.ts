@@ -1,15 +1,27 @@
 import { Account } from "@AthenaShared/interfaces/iAccount"
 
-interface LoginAccount {
+export type AccountType = 'username' | 'email'
+
+export interface LoginForm {
+    account: string,
     password: string
+    type: AccountType,
 }
 
-export interface UsernameAccount extends LoginAccount {
-    username: string
+export interface RegisterForm {
+    email?: string,
+    verifyCode?: string,
+    username: string,
+    password: string,
+    confirmPassword: string,
 }
 
-export interface EmailAccount extends LoginAccount {
-    email: string
+export interface ForgetForm {
+    account: string,
+    verifyCode: string,
+    password: string,
+    confirmPassword: string,
+    type: AccountType,
 }
 
 export interface iAccount extends Account {

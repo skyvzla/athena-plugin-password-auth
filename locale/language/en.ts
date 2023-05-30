@@ -3,6 +3,9 @@ export default {
         email: 'Email',
         username: 'Username',
         password: 'Password',
+        verifyCode: 'Verify Code',
+        account: 'Username / Email',
+        confirmPassword: 'Confirm Password',
     },
     titles: {
         forget: 'Forget Password',
@@ -10,9 +13,11 @@ export default {
         login: 'Login',
     },
     buttons: {
-        forget: 'Forget Password',
+        forget: 'Reset Password',
         register: 'Register',
         login: 'Login',
+        getCode: 'Get Code',
+        resendCode: 'Resend Code({seconds})',
     },
     validate: {
         email: {
@@ -27,6 +32,17 @@ export default {
             required: 'Please input password',
             min: 'Password length must be greater than or equal to 6',
         },
+        verifyCode: {
+            required: 'Please input verify code',
+        },
+        account: {
+            required: 'Please input username / email',
+            min: 'Account length must be greater than or equal to 4',
+        },
+        confirmPassword: {
+            required: 'Please input confirm password',
+            notMatch: 'Confirm password and password do not match',
+        }
     },
     errors: {
         notExists: 'Account not exists',
@@ -39,34 +55,20 @@ export default {
     login: {
         fields: {
             remember: 'Remember Me',
-            account: 'Username / Email',
-        },
-        validate: {
-            account: {
-                required: 'Please input username / email',
-                min: 'Account length must be greater than or equal to 4',
-            }
-        }
-    },
-    register: {
-        fields: {
-            confirmPassword: 'Confirm Password',
-        },
-        validate: {
-            confirmPassword: {
-                required: 'Please input confirm password',
-                notMatch: 'Confirm password and password do not match',
-            }
         }
     },
     mail: {
+        message: {
+            success: 'Get the verification code successfully',
+            error: 'Failed to get verification code, please try again'
+        },
         register: {
             subject: 'Register Code',
             text: 'Your register code is {code}'
         },
         forget: {
             subject: 'Forget Password Code',
-            text: 'Your forget password code is {code}'
+            text: 'You are resetting your account password, your verification code is {code}<br/> username: {username}, email: {email}'
         }
     }
 }

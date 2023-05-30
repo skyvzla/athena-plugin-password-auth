@@ -5,14 +5,7 @@ import { PasswordAuthEvents } from "../../shared/events";
 import encrypt from "./encrypt";
 import MailService from "./email"
 import { t } from "../../locale";
-
-interface RegisterForm {
-    email?: string,
-    verifyCode?: string,
-    username: string,
-    password: string,
-    confirmPassword: string,
-}
+import { RegisterForm } from "../../shared/interfaces"
 
 const subject = t('mail.register.subject')
 const text = t('mail.register.text')
@@ -27,35 +20,37 @@ async function register(player: alt.Player, account: RegisterForm) {
         const token = RegisterVerify[player.id]
         if (!token || token.email !== account.email || token.code !== account.verifyCode) {
             token.attempts++;
-            alt.emitClient(player, PasswordAuthEvents.client.register, false, 'errors.incorrectCode')
+            Athena.webview.emit(player, PasswordAuthEvents.webview.register, false, 'errors.incorrectCode')
             if (token.attempts >= 3) {
                 delete RegisterVerify[player.id]
             }
             return;
         }
-        delete RegisterVerify[player.id]
 
-        if (await Athena.systems.account.getAccount('email', account.email)) {
-            alt.emitClient(player, PasswordAuthEvents.client.register, false, 'errors.emailUsed')
-            return;
-        }
+        delete RegisterVerify[player.id]
         accountData['emial'] = account.email;
     }
 
     if (await Athena.systems.account.getAccount('username', account.username)) {
-        alt.emitClient(player, PasswordAuthEvents.client.register, false, 'errors.usernameExists')
+        Athena.webview.emit(player, PasswordAuthEvents.webview.register, false, 'errors.usernameExists')
         return;
     }
 
     await Athena.systems.account.create(player, accountData)
-    alt.emitClient(player, PasswordAuthEvents.client.register, true)
+    Athena.webview.emit(player, PasswordAuthEvents.webview.register, true)
 }
 
 async function sendRegisterCode(player: alt.Player, email: string) {
+    if (await Athena.systems.account.getAccount('email', email)) {
+        Athena.webview.emit(player, PasswordAuthEvents.webview.sendRegisterCode, false, 'errors.emailUsed')
+        return;
+    }
+
     const code = Math.floor(100000 + Math.random() * 900000).toString()
     RegisterVerify[player.id] = { email, code, attempts: 0 }
+
     const result = await MailService.send(email, subject, text.replace('{code}', code))
-    alt.emitClient(player, PasswordAuthEvents.client.sendRegisterCode, result)
+    Athena.webview.emit(player, PasswordAuthEvents.webview.sendRegisterCode, result)
 }
 
 export function init() {

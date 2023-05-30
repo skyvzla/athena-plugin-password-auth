@@ -1,18 +1,20 @@
 export const PasswordAuthEvents = {
     client: {
         showPage: 'passwordAuth:client:showPage',
-        login: 'passwordAuth:client:loginResult',
-        register: 'passwordAuth:client:registerResult',
-        sendRegisterCode: 'passwordAuth:client:sendRegisterCodeResult',
+        closePage: 'passwordAuth:client:closePage',
     },
     server: {
-        usernameLogin: 'passwordAuth:server:usernameLogin',
-        emailLogin: 'passwordAuth:server:emailLogin',
+        login: 'passwordAuth:server:login',
         register: 'passwordAuth:server:register',
-        sendRegisterCode: 'passwordAuth:server:sendRegisterCode'
+        forget: 'passwordAuth:server:forget',
+        sendRegisterCode: 'passwordAuth:server:sendRegisterCode',
+        sendForgetCode: 'passwordAuth:server:sendForgetCode',
     },
     webview: {
-        login: 'passwordAuth:webview:loginError',
-        register: 'passwordAuth:webview:register'
+        login: 'passwordAuth:webview:loginResult',
+        register: 'passwordAuth:webview:registerResult',
+        forget: 'passwordAuth:webview:forgetResult',
+        sendRegisterCode: 'passwordAuth:webview:sendRegisterCodeResult',
+        sendForgetCode: 'passwordAuth:webview:sendForgetCodeResult',
     }
 }
