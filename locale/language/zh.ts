@@ -4,6 +4,8 @@ export default {
         username: '账户名',
         password: '密码',
         verifyCode: '验证码',
+        account: '账户名 / 邮箱',
+        confirmPassword: '确认密码',
     },
     titles: {
         forget: '忘记密码',
@@ -32,6 +34,14 @@ export default {
         },
         verifyCode: {
             required: '请输入验证码',
+        },
+        account: {
+            required: '请输入账户名 / 邮箱',
+            min: '账户名 / 邮箱长度必须大于等于4',
+        },
+        confirmPassword: {
+            required: '请输入确认密码',
+            notMatch: '确认密码和密码不匹配',
         }
     },
     errors: {
@@ -45,24 +55,6 @@ export default {
     login: {
         fields: {
             remember: '记住账号',
-            account: '账户名 / 邮箱',
-        },
-        validate: {
-            account: {
-                required: '请输入账户名 / 邮箱',
-                min: '账户名 / 邮箱长度必须大于等于4',
-            }
-        }
-    },
-    register: {
-        fields: {
-            confirmPassword: '确认密码',
-        },
-        validate: {
-            confirmPassword: {
-                required: '请输入确认密码',
-                notMatch: '确认密码和密码不匹配',
-            }
         }
     },
     mail: {
