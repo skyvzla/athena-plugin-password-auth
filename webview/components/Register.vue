@@ -154,7 +154,4 @@ WebViewEvents.on(PasswordAuthEvents.webview.register, (state: boolean, error: st
 </script>
 
 <style scoped>
-.auth-other {
-    justify-content: flex-end;
-}
 </style>

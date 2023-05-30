@@ -140,12 +140,4 @@ WebViewEvents.on(PasswordAuthEvents.webview.forget, (state: boolean, error: stri
 
 </script>
 
-<style scoped>
-.panel-title {
-    font-size: 42px !important;
-}
-
-.auth-other {
-    justify-content: flex-end !important;
-}
-</style>
+<style scoped></style>

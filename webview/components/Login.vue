@@ -94,4 +94,8 @@ WebViewEvents.on(PasswordAuthEvents.webview.login, (error: string | undefined) =
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.auth-other {
+    justify-content: space-between;
+}
+</style>
