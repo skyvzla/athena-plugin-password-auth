@@ -38,7 +38,7 @@ async function register(player: alt.Player, account: RegisterForm) {
         }
 
         RegisterVerify.delete(player.id)
-        accountData['emial'] = account.email;
+        accountData['email'] = account.email;
     }
 
     if (await Athena.systems.account.getAccount('username', account.username)) {
