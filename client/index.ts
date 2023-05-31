@@ -9,36 +9,27 @@ async function showPage() {
     Page = new AthenaClient.webview.Page({
         name: PageName,
         callbacks: {
-            onReady: async () => {
-                alt.log('Password Auth Page Ready')
-            },
-            onClose: async () => {
-                alt.log('Password Auth Page Closed')
-            }
+            onReady() { },
+            onClose() { }
         },
         options: {
+            disableEscapeKey: true,
             onOpen: {
                 focus: true,
-                hideHud: true,
-                hideOverlays: true,
-                setIsMenuOpenToTrue: true,
                 showCursor: true,
-                disableControls: 'all',
-                disablePauseMenu: true,
+                hideOverlays: true,
             },
             onClose: {
                 hideCursor: true,
-                showHud: true,
-                showOverlays: true,
                 unfocus: true,
-                setIsMenuOpenToFalse: true,
-                enableControls: true,
-                enablePauseMenu: true,
+                showOverlays: true,
             },
         },
     })
 
-    Page.open()
+    AthenaClient.webview.focus();
+    AthenaClient.webview.showCursor(true);
+    await AthenaClient.webview.openPages([PageName], true, Page.close.bind(Page));
 }
 
 AthenaClient.webview.on(PasswordAuthEvents.client.closePage, () => {
