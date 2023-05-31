@@ -5,11 +5,14 @@ export default {
     encryptSalt: '',
     // If value it is true, please fill in the relevant information of maiService
     emailVerify: false,
-    // Email service
+    // Email service, see https://nodemailer.com/
     mailService: {
         host: '',
         port: 587,
-        from: '', // sender
+        from: { // sender
+            name: '',
+            address: ''
+        },
         user: '', // login account
         password: ''
     }

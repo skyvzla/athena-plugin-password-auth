@@ -74,7 +74,7 @@ export default {
         },
         forget: {
             subject: '找回密码',
-            text: '你正在找回账号密码，你的验证码为 {code}<br/> 账号信息（账号: {username}, 邮箱: {email}）'
+            text: '你正在找回账号密码，你的验证码为 {code}\n找回账号为: {username}, 邮箱: {email}'
         }
     }
 }

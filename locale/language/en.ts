@@ -74,7 +74,7 @@ export default {
         },
         forget: {
             subject: 'Forget Password Code',
-            text: 'You are resetting your account password, your verification code is {code}<br/> username: {username}, email: {email}'
+            text: 'You are resetting your account password, your verification code is {code}\nThe reset username is: {username}, email: {email}'
         }
     }
 }

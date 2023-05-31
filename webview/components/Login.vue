@@ -81,15 +81,16 @@ function doLogin() {
     })
 }
 
-WebViewEvents.on(PasswordAuthEvents.webview.login, (error: string | undefined) => {
+WebViewEvents.on(PasswordAuthEvents.webview.login, (state: boolean, error: string | undefined) => {
     submitting.value = false
-    if (error) {
+    if (state) {
+        ElNotification.closeAll()
+        WebViewEvents.emitClient(PasswordAuthEvents.client.closePage)
+    } else {
         ElNotification.error({
             title: t('titles.login'),
             message: t(error)
         })
-    } else {
-        WebViewEvents.emitClient(PasswordAuthEvents.client.closePage)
     }
 })
 </script>

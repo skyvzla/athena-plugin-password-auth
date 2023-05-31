@@ -41,7 +41,7 @@ async function showPage() {
     Page.open()
 }
 
-alt.on(PasswordAuthEvents.client.closePage, () => {
+AthenaClient.webview.on(PasswordAuthEvents.client.closePage, () => {
     Page.close(true)
 })
 alt.onServer(PasswordAuthEvents.client.showPage, showPage)

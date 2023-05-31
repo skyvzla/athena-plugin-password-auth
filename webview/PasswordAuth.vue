@@ -1,18 +1,20 @@
 <template>
-    <div class="carousel">
-        <ElCarousel indicator-position="none" arrow="never" height="100vh" :interval="10000">
-            <ElCarouselItem v-for="index in 3">
-                <img class="bg-img" :src="`/plugins/images/bg${index}.jpg`" />
-            </ElCarouselItem>
-        </ElCarousel>
-    </div>
-    <div class="container">
-        <div class="panel">
-            <div class="panel-title">{{ pageTitle }}</div>
-            <component :is="page" @change-page="(name) => (pageName = name)" />
+    <div class="page">
+        <div class="carousel">
+            <ElCarousel indicator-position="none" arrow="never" height="100vh" :interval="10000">
+                <ElCarouselItem v-for="index in 3">
+                    <img class="bg-img" :src="`/plugins/images/bg${index}.jpg`" />
+                </ElCarouselItem>
+            </ElCarousel>
         </div>
-        <div class="left-bottom-corner"></div>
-        <div class="right-top-corner"></div>
+        <div class="container">
+            <div class="panel">
+                <div class="panel-title">{{ pageTitle }}</div>
+                <component :is="page" @change-page="(name) => (pageName = name)" />
+            </div>
+            <div class="left-bottom-corner"></div>
+            <div class="right-top-corner"></div>
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
