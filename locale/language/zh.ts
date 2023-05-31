@@ -8,11 +8,12 @@ export default {
         confirmPassword: '确认密码',
     },
     titles: {
-        forget: '忘记密码',
+        forget: '密码找回',
         register: '玩家注册',
         login: '玩家登录',
     },
     buttons: {
+        reset: '重置密码',
         forget: '忘记密码',
         register: '注册账户',
         login: '登录',

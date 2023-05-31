@@ -28,7 +28,7 @@
     </div>
     <div class="footer">
         <ElButton type="primary" @click="doForget" size="large" :loading="submitting">
-            {{ t('buttons.forget') }}
+            {{ t('buttons.reset') }}
         </ElButton>
     </div>
 </template>

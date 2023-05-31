@@ -14,10 +14,10 @@
         <div>
             <ElButton v-if="config.emailVerify" type="info" link @click="emits('changePage', 'Forget')"
                 :disabled="submitting">
-                {{ t('titles.forget') }}
+                {{ t('buttons.forget') }}
             </ElButton>
             <ElButton type="info" link @click="emits('changePage', 'Register')" :disabled="submitting">
-                {{ t('titles.register') }}
+                {{ t('buttons.register') }}
             </ElButton>
         </div>
     </div>

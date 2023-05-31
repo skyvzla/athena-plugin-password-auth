@@ -8,12 +8,13 @@ export default {
         confirmPassword: 'Confirm Password',
     },
     titles: {
-        forget: 'Forget Password',
-        register: 'Register',
-        login: 'Login',
+        forget: 'Reset Password',
+        register: 'Player Register',
+        login: 'Player Login',
     },
     buttons: {
-        forget: 'Reset Password',
+        reset: 'Reset Password',
+        forget: 'Forget Password?',
         register: 'Register',
         login: 'Login',
         getCode: 'Get Code',

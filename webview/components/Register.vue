@@ -28,10 +28,10 @@
     <div class="auth-other">
         <ElButton type="info" @click="() => emits('changePage', 'Forget')" link v-if="config.emailVerify"
             :disabled="submitting">
-            {{ t('titles.forget') }}
+            {{ t('buttons.forget') }}
         </ElButton>
         <ElButton type="info" @click="() => emits('changePage', 'Login')" link :disabled="submitting">
-            {{ t('titles.login') }}
+            {{ t('buttons.login') }}
         </ElButton>
     </div>
     <div class="footer">
@@ -153,5 +153,4 @@ WebViewEvents.on(PasswordAuthEvents.webview.register, (state: boolean, error: st
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
