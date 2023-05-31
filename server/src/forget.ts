@@ -8,9 +8,15 @@ import { AccountType, ForgetForm } from "../../shared/interfaces";
 import MailService from "./email";
 import encrypt from "./encrypt";
 
+interface iForgetVerify {
+    account: string | number,
+    code: string,
+    attempts: number
+}
+
 const subject = t('mail.forget.subject')
 const text = t('mail.forget.text')
-const ForgetVerify: Map<number, { email: string, code: string, attempts: number }> = new Map()
+const ForgetVerify: Map<number, iForgetVerify> = new Map()
 
 async function forget(player: alt.Player, data: ForgetForm) {
     const accountData = await Athena.systems.account.getAccount(data.type, data.account)
@@ -19,17 +25,23 @@ async function forget(player: alt.Player, data: ForgetForm) {
         return;
     }
 
-    const token = ForgetVerify[player.id]
-    if (!token || token.code !== data.verifyCode) {
+    const token = ForgetVerify.get(player.id)
+
+    if (!token) {
+        Athena.webview.emit(player, PasswordAuthEvents.webview.forget, false, 'errors.incorrectCode')
+        return;
+    }
+
+    if (token.account != accountData._id || token.code !== data.verifyCode) {
         token.attempts++;
         Athena.webview.emit(player, PasswordAuthEvents.webview.forget, false, 'errors.incorrectCode')
         if (token.attempts >= 3) {
-            delete ForgetVerify[player.id]
+            ForgetVerify.delete(player.id)
         }
         return;
     }
 
-    delete ForgetVerify[player.id]
+    ForgetVerify.delete(player.id)
 
     await Database.updatePartialData(
         accountData._id,
@@ -46,8 +58,17 @@ async function sendCode(player: alt.Player, type: AccountType, account: string) 
         return;
     }
 
+    if (!accountData.email) {
+        Athena.webview.emit(player, PasswordAuthEvents.webview.sendForgetCode, false, 'errors.noEmail')
+        return;
+    }
+
     const code = Math.floor(100000 + Math.random() * 900000).toString()
-    ForgetVerify[player.id] = { email: accountData.email, code, attempts: 0 }
+    ForgetVerify.set(player.id, {
+        account: accountData._id,
+        code,
+        attempts: 0
+    })
 
     const result = await MailService.send(accountData.email, subject, text.replace('{code}', code))
     Athena.webview.emit(player, PasswordAuthEvents.webview.sendForgetCode, result)

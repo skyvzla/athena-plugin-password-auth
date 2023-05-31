@@ -1,10 +1,10 @@
 export default {
     fields: {
         email: '邮箱',
-        username: '账户名',
+        username: '账号',
         password: '密码',
         verifyCode: '验证码',
-        account: '账户名 / 邮箱',
+        account: '账号 / 邮箱',
         confirmPassword: '确认密码',
     },
     titles: {
@@ -15,7 +15,7 @@ export default {
     buttons: {
         reset: '重置密码',
         forget: '忘记密码',
-        register: '注册账户',
+        register: '注册账号',
         login: '登录',
         getCode: '获取验证码',
         resendCode: '重新发送({seconds})',
@@ -26,8 +26,8 @@ export default {
             format: '邮箱格式不正确',
         },
         username: {
-            required: '请输入账户名',
-            min: '账户名长度必须大于等于4',
+            required: '请输入账号',
+            min: '账号长度必须大于等于4',
         },
         password: {
             required: '请输入密码',
@@ -37,8 +37,8 @@ export default {
             required: '请输入验证码',
         },
         account: {
-            required: '请输入账户名 / 邮箱',
-            min: '账户名 / 邮箱长度必须大于等于4',
+            required: '请输入账号 / 邮箱',
+            min: '账号 / 邮箱长度必须大于等于4',
         },
         confirmPassword: {
             required: '请输入确认密码',
@@ -50,12 +50,13 @@ export default {
         forget: '密码重置成功',
     },
     errors: {
-        notExists: '账户未注册',
+        notExists: '账号未注册',
         incorrectPassword: '密码错误',
         incorrectCode: '验证码错误',
         emailUsed: '邮箱已绑定账号',
-        usernameExists: '账户名已被注册',
+        usernameExists: '账号已被注册',
         logged: '账号已经在其他设备登录',
+        noEmail: '该账号未绑定邮箱，请联系服务器管理员'
     },
     login: {
         fields: {
@@ -73,7 +74,7 @@ export default {
         },
         forget: {
             subject: '找回密码',
-            text: '你正在找回账户密码，你的验证码为 {code}<br/> 账号信息（账户名: {username}, 邮箱: {email}）'
+            text: '你正在找回账号密码，你的验证码为 {code}<br/> 账号信息（账号: {username}, 邮箱: {email}）'
         }
     }
 }

@@ -7,9 +7,15 @@ import MailService from "./email"
 import { t } from "../../locale";
 import { RegisterForm } from "../../shared/interfaces"
 
+interface iRegisterVerify {
+    email: string,
+    code: string,
+    attempts: number
+}
+
 const subject = t('mail.register.subject')
 const text = t('mail.register.text')
-const RegisterVerify: Map<number, { email: string, code: string, attempts: number }> = new Map()
+const RegisterVerify: Map<number, iRegisterVerify> = new Map()
 
 async function register(player: alt.Player, account: RegisterForm) {
     const accountData = {
@@ -17,17 +23,21 @@ async function register(player: alt.Player, account: RegisterForm) {
         password: encrypt(account.password),
     }
     if (config.emailVerify) {
-        const token = RegisterVerify[player.id]
-        if (!token || token.email !== account.email || token.code !== account.verifyCode) {
+        const token = RegisterVerify.get(player.id)
+        if (!token) {
+            Athena.webview.emit(player, PasswordAuthEvents.webview.register, false, 'errors.incorrectCode')
+            return;
+        }
+        if (token.email !== account.email || token.code !== account.verifyCode) {
             token.attempts++;
             Athena.webview.emit(player, PasswordAuthEvents.webview.register, false, 'errors.incorrectCode')
             if (token.attempts >= 3) {
-                delete RegisterVerify[player.id]
+                RegisterVerify.delete(player.id)
             }
             return;
         }
 
-        delete RegisterVerify[player.id]
+        RegisterVerify.delete(player.id)
         accountData['emial'] = account.email;
     }
 
@@ -47,7 +57,7 @@ async function sendRegisterCode(player: alt.Player, email: string) {
     }
 
     const code = Math.floor(100000 + Math.random() * 900000).toString()
-    RegisterVerify[player.id] = { email, code, attempts: 0 }
+    RegisterVerify.set(player.id, { email, code, attempts: 0 })
 
     const result = await MailService.send(email, subject, text.replace('{code}', code))
     Athena.webview.emit(player, PasswordAuthEvents.webview.sendRegisterCode, result)

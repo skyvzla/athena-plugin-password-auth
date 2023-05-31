@@ -56,6 +56,7 @@ export default {
         emailUsed: 'Email has been used',
         usernameExists: 'Username has been used',
         logged: 'Account has been logged in',
+        noEmail: 'This account is not bound with an email address, Please contact the server administrator'
     },
     login: {
         fields: {

@@ -12,6 +12,11 @@ async function login(player: alt.Player, data: LoginForm) {
         return;
     }
 
+    if (account.banned) {
+        player.kick(account.reason || 'You are banned from this server')
+        return;
+    }
+
     if (account.password !== encrypt(data.password)) {
         Athena.webview.emit(player, PasswordAuthEvents.webview.login, false, 'errors.incorrectPassword')
         return;
