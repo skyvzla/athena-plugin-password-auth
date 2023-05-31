@@ -45,6 +45,10 @@ export default {
             notMatch: '确认密码和密码不匹配',
         }
     },
+    success: {
+        register: '账号注册成功',
+        forget: '密码重置成功',
+    },
     errors: {
         notExists: '账户未注册',
         incorrectPassword: '密码错误',

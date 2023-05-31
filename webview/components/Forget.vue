@@ -126,7 +126,7 @@ WebViewEvents.on(PasswordAuthEvents.webview.forget, (state: boolean, error: stri
         emits('changePage', 'Login')
         ElNotification.success({
             title: t('titles.forget'),
-            message: t('forget.result.success'),
+            message: t('success.forget'),
         })
         localStorage.removeItem('password')
     } else {

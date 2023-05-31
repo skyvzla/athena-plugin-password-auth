@@ -141,7 +141,7 @@ WebViewEvents.on(PasswordAuthEvents.webview.register, (state: boolean, error: st
         emits('changePage', 'Login')
         ElNotification.success({
             title: t('titles.register'),
-            message: t('register.result.success'),
+            message: t('success.register'),
         })
     } else {
         ElNotification.error({

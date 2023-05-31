@@ -45,6 +45,10 @@ export default {
             notMatch: 'Confirm password and password do not match',
         }
     },
+    success: {
+        register: 'Register successfully',
+        forget: 'Reset password successfully',
+    },
     errors: {
         notExists: 'Account not exists',
         incorrectPassword: 'Incorrect password',
