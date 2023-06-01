@@ -2,7 +2,6 @@ import * as Athena from "@AthenaServer/api";
 import * as alt from "alt-server";
 import { PasswordAuthEvents } from "../../shared/events";
 import { LoginForm, iAccount } from "../../shared/interfaces";
-import encrypt from "./encrypt";
 
 async function login(player: alt.Player, data: LoginForm) {
     const account = await Athena.systems.account.getAccount(data.type, data.account) as iAccount | undefined
@@ -17,7 +16,7 @@ async function login(player: alt.Player, data: LoginForm) {
         return;
     }
 
-    if (account.password !== encrypt(data.password)) {
+    if (Athena.utility.hash.testPassword(data.password, account.password)) {
         Athena.webview.emit(player, PasswordAuthEvents.webview.login, false, 'errors.incorrectPassword')
         return;
     }

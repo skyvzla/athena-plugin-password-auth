@@ -6,7 +6,6 @@ import config from "../../shared/config";
 import { PasswordAuthEvents } from "../../shared/events";
 import { AccountType, ForgetForm } from "../../shared/interfaces";
 import MailService from "./email";
-import encrypt from "./encrypt";
 
 interface iForgetVerify {
     account: string | number,
@@ -45,7 +44,7 @@ async function forget(player: alt.Player, data: ForgetForm) {
 
     await Database.updatePartialData(
         accountData._id,
-        { password: encrypt(data.password) },
+        { password: Athena.utility.hash.hashPassword(data.password) },
         Athena.database.collections.Accounts
     )
     Athena.webview.emit(player, PasswordAuthEvents.webview.forget, true)

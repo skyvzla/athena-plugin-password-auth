@@ -2,7 +2,6 @@ import * as Athena from "@AthenaServer/api";
 import * as alt from "alt-server";
 import config from "../../shared/config";
 import { PasswordAuthEvents } from "../../shared/events";
-import encrypt from "./encrypt";
 import MailService from "./email"
 import { t } from "../../locale";
 import { RegisterForm } from "../../shared/interfaces"
@@ -20,7 +19,7 @@ const RegisterVerify: Map<number, iRegisterVerify> = new Map()
 async function register(player: alt.Player, account: RegisterForm) {
     const accountData = {
         username: account.username,
-        password: encrypt(account.password),
+        password: Athena.utility.hash.hashPassword(account.password),
     }
     if (config.emailVerify) {
         const token = RegisterVerify.get(player.id)
